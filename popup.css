@@ -1,0 +1,60 @@
+/* popup.css */
+body {
+  width: 200px;
+  padding: 10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+body {
+    width: 200px;
+    padding: 10px;
+    background-color: #0066a7;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+  input, button {
+      border: 1px solid #fff;
+      min-height: 25px;
+      padding: 0 5px;
+      font-size: 20px;
+      color: #607D8B;
+      margin-bottom: 5px;
+  }
+  button {
+      text-transform: uppercase;
+      font-size: 14px;
+      font-weight: 600;
+      min-height: 30px;
+      cursor: pointer;
+  }
+  label {
+      color: #fff;
+      font-size: 13px;
+      letter-spacing: 1px;
+  }
+  .logo {
+      text-align: center;
+      border-bottom: 1px solid #fff;
+      margin-bottom: 15px;
+  }
+  .logo img {
+      width: 100px;
+  }
+  .result {
+      font-size: 15px;
+      font-weight: 600;
+      color: green;
+      font-family: monospace;
+      background: #fff;
+      width: 100%;
+      margin: 5px auto;
+      min-width: 100px;
+      text-align: center;
+      letter-spacing: 0;
+      line-height: 25px;
+  }
