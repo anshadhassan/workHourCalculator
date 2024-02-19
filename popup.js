@@ -8,13 +8,18 @@ document.addEventListener('DOMContentLoaded', function () {
   calculateExitTimeBtn.addEventListener('click', function () {
     const entryTime = entryTimeInput.value;
     if (entryTime) {
-      const { exitTime, hoursRemaining, hoursSpent } = calculateExitTime(entryTime);
+      const { exitTime, hoursRemaining, hoursSpent, isCompleted } = calculateExitTime(entryTime);
       exitTimeResult.textContent = `Exit Time: ${exitTime}`;
       spentTimeResult.textContent = `Spent Time: ${hoursSpent}`;
       remainingTimeResult.textContent = `Remaining Time: ${hoursRemaining}`;
+      console.log('isCompleted', isCompleted)
+      if (isCompleted) {
+        console.log('is completed 8:30 hours')
+      }
     } else {
       exitTimeResult.textContent = 'Please enter the entry time.';
     }
+    
   });
 
   function calculateExitTime(entryTime) {
@@ -30,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log(entryTimeObj)
     const exitTimeObj = new Date(entryTimeObj.getTime() + 8 * 60 * 60 * 1000 + 30 * 60 * 1000);
-   
+
     // Calculate hours remaining and hours spent
     const hoursRemaining = Math.abs(exitTimeObj.getHours() - currentTime.getHours());
     const minuteRemaining = Math.abs(exitTimeObj.getMinutes() - currentTime.getMinutes());
@@ -44,12 +49,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Format exit time as HH:mm AM/PM
     const formattedExitTime = exitTimeObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
-    console.log('hoursRemaining', `${hoursSpent}:${minutesSpent}`)
+
+    let isCompleted = false
+    if(hoursSpent >= 8) {
+      let minute = hoursSpent*60
+      isCompleted = minutesSpent + minute > 510  ? true : false
+    }
 
     return { 
       exitTime: formattedExitTime, 
       hoursRemaining: `${finalHoursRemaining}:${finalMinutesRemaining}`, 
-      hoursSpent: `${finalHoursSpent}:${finalMinutesSpent}`
+      hoursSpent: `${finalHoursSpent}:${finalMinutesSpent}`,
+      isCompleted
     };
   }
 });
