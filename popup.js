@@ -11,9 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
       const { exitTime, hoursRemaining, hoursSpent, isCompleted } = calculateExitTime(entryTime);
       exitTimeResult.textContent = `Exit Time: ${exitTime}`;
       spentTimeResult.textContent = `Spent Time: ${hoursSpent}`;
-      remainingTimeResult.textContent = `Remaining Time: ${hoursRemaining}`;
+      remainingTimeResult.textContent = isCompleted ?   `Turn off your system and RUN!!!` : `Remaining Time: ${hoursRemaining}`;
       console.log('isCompleted', isCompleted)
       if (isCompleted) {
+        document.getElementById('animatedElement').classList.add('animation-triggered');
         console.log('is completed 8:30 hours')
       }
     } else {
@@ -37,15 +38,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const exitTimeObj = new Date(entryTimeObj.getTime() + 8 * 60 * 60 * 1000 + 30 * 60 * 1000);
 
     // Calculate hours remaining and hours spent
+    const hoursSpent = Math.abs(currentTime.getHours() - entryTimeObj.getHours());
+    const minutesSpent = Math.abs(currentTime.getMinutes() - entryTimeObj.getMinutes());
+    const finalMinutesSpent = String(minutesSpent).length < 2 ? '0' + minutesSpent : minutesSpent 
+    const finalHoursSpent = String(hoursSpent).length < 2 ? '0' + hoursSpent : hoursSpent
+    
     const hoursRemaining = Math.abs(exitTimeObj.getHours() - currentTime.getHours());
     const minuteRemaining = Math.abs(exitTimeObj.getMinutes() - currentTime.getMinutes());
     const finalMinutesRemaining = String(minuteRemaining).length < 2 ? '0' + minuteRemaining : minuteRemaining 
     const finalHoursRemaining = String(hoursRemaining).length < 2 ? '0' + hoursRemaining : hoursRemaining
 
-    const hoursSpent = Math.abs(currentTime.getHours() - entryTimeObj.getHours());
-    const minutesSpent = Math.abs(currentTime.getMinutes() - entryTimeObj.getMinutes());
-    const finalMinutesSpent = String(minutesSpent).length < 2 ? '0' + minutesSpent : minutesSpent 
-    const finalHoursSpent = String(hoursSpent).length < 2 ? '0' + hoursSpent : hoursSpent
+
 
     // Format exit time as HH:mm AM/PM
     const formattedExitTime = exitTimeObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });

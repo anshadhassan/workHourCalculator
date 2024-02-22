@@ -58,3 +58,16 @@ body {
       letter-spacing: 0;
       line-height: 25px;
   }
+
+  @keyframes growAnimation {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.5);
+    }
+  }
+  
+  .animation-triggered {
+    animation: growAnimation 2s ease-in-out; /* Adjust duration and timing function as needed */
+  }
